@@ -21,7 +21,9 @@ assembly_info:
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}"
 
-
+environment:
+  access_token:
+    secure: 9oa4L71WB9kQ26UGlQh691KDzNjI5JqcjAoxM2uOUXbERNK94pY3xUDa0wsdJYqk
 
 #---------------------------------#
 #       build configuration       #
@@ -35,6 +37,16 @@ before_build:
 build:
   project: Coco.sln
 
+
+#on_success:
+#  - git config --global credential.helper store
+#  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+#  - git config --global user.email "hisroyalredness@gmail.com"
+#  - git config --global user.name "Keith Flether (AppVeyor)"
+#  - git commit ...
+#  - git push ...
+
+
 #---------------------------------#
 #      artifacts configuration    #
 #---------------------------------#
@@ -42,8 +54,6 @@ build:
 artifacts:
   - path: Deploy
     name: CocoDeploy
-
-
 
 #---------------------------------#
 #     deployment configuration    #
@@ -58,3 +68,4 @@ artifacts:
 #  prerelease: true
 #  on:
 #    branch: coco
+
