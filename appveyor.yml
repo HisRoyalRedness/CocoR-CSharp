@@ -1,0 +1,59 @@
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+version: 1.0.1.{build}
+branches:
+  only:
+    - master
+skip_tags: true
+
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: "1.0.1.0"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+platform: Any CPU
+configuration: Release
+before_build:
+  - nuget restore
+
+
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+  - path: Deploy
+    name: CocoDeploy
+
+
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+#deploy:
+#  description: 'CygwinDownloader Release: develop branch'
+#  provider: GitHub
+#  auth_token:
+#    secure: TrEuWWiCLlhkcejZorX7lC0wE0gTnYUuMVTsk6yy9QnZNo/4vYUfO3yhHeCa4MPA
+#  artifact: CygwinDownloader
+#  prerelease: true
+#  on:
+#    branch: coco

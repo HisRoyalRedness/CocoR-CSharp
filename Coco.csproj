@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="appveyor.yml" />
     <None Include="Deploy\Parser.frame" />
     <None Include="Deploy\Scanner.frame" />
     <None Include="PreBuild.cmd" />
