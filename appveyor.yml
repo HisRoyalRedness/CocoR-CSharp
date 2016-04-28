@@ -32,7 +32,8 @@ configuration: Release
 before_build:
   - nuget restore
 
-
+build:
+  project: Coco.sln
 
 #---------------------------------#
 #      artifacts configuration    #
