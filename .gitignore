@@ -238,3 +238,5 @@ _Pvt_Extensions
 /CocoSourcesCS.zip
 /CocoBuild.cmd
 /build.bat
+/Parser.cs
+/Scanner.cs
