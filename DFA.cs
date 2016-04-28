@@ -316,6 +316,7 @@ class Generator {
 		try {
 			if (File.Exists(fn)) File.Copy(fn, fn + ".old", true);
 			gen = new StreamWriter(new FileStream(fn, FileMode.Create)); /* pdt */
+            gen.WriteLine("// Generated on: {0}{1}", DateTime.Now.ToString("G"), Environment.NewLine);
 		} catch (IOException) {
 			throw new FatalError("Cannot generate file: " + fn);
 		}
@@ -985,7 +986,7 @@ public class DFA {
 	public void WriteScanner() {
 		Generator g = new Generator(tab);
 		fram = g.OpenFrame("Scanner.frame");
-		gen = g.OpenGen("Scanner.cs");
+		gen = g.OpenGen(Constants.SCANNER_GENERATED_FILENAME);
 		if (dirtyDFA) MakeDeterministic();
 
 		g.GenCopyright();

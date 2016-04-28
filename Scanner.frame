@@ -226,7 +226,7 @@ public class UTF8Buffer: Buffer {
 //-----------------------------------------------------------------------------------
 // Scanner
 //-----------------------------------------------------------------------------------
-public class Scanner {
+public partial class Scanner {
 	const char EOL = '\n';
 	const int eofSym = 0; /* pdt */
 -->declarations

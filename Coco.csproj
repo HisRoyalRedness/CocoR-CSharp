@@ -51,18 +51,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coco.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="DFA.cs" />
-    <Compile Include="Parser.cs" />
+    <Compile Include="Parser.generated.cs" />
     <Compile Include="ParserGen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Scanner.cs" />
+    <Compile Include="Scanner.generated.cs" />
     <Compile Include="Tab.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="coc.bat" />
+    <None Include="PreBuild.cmd" />
     <None Include="Coco.atg" />
     <None Include="LICENSE" />
+    <None Include="PostBuild.cmd" />
     <None Include="Parser.frame" />
     <None Include="README.md" />
     <None Include="Scanner.frame" />
@@ -70,11 +72,10 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>"$(ProjectDir)PostBuild.cmd" "$(ProjectDir)" "$(ConfigurationName)" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>"$(ProjectDir)Coc.bat" "$(ProjectDir)"</PreBuildEvent>
+    <PreBuildEvent>"$(ProjectDir)PreBuild.cmd" "$(ProjectDir)" "$(ConfigurationName)"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

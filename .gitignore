@@ -240,3 +240,5 @@ _Pvt_Extensions
 /build.bat
 /Parser.cs
 /Scanner.cs
+/Parser.generated.cs
+/Scanner.generated.cs
