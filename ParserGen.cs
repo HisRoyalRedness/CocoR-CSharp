@@ -149,7 +149,7 @@ public class ParserGen {
 			else if (n <= maxTerm)
 				foreach (Symbol sym in tab.terminals) {
 					if (s[sym.n]) {
-						gen.Write("la.kind == {0}", sym.n);
+						gen.Write("la.kind == {0}{1}", sym.n, tab.symNames ? $" /* {SanitiseSymbolName(sym.name)} */ " : string.Empty);
 						--n;
 						if (n > 0) gen.Write(" || ");
 					}
@@ -158,7 +158,10 @@ public class ParserGen {
 				gen.Write("StartOf({0})", NewCondSet(s));
 		}
 	}
-		
+	
+    public static string SanitiseSymbolName(string name) => name.Replace("*/", "*./");
+    
+
 	void PutCaseLabels (BitArray s) {
 		foreach (Symbol sym in tab.terminals)
 			if (s[sym.n]) gen.Write("case {0}: ", sym.n);
@@ -180,7 +183,7 @@ public class ParserGen {
 					Indent(indent);
 					// assert: if isChecked[p.sym.n] is true, then isChecked contains only p.sym.n
 					if (isChecked[p.sym.n]) gen.WriteLine("Get();");
-					else gen.WriteLine("Expect({0});", p.sym.n);
+					else gen.WriteLine("Expect({0});{1}", p.sym.n, tab.symNames ? $" /* {SanitiseSymbolName(p.sym.name)} */" : string.Empty);
 					break;
 				}
 				case Node.wt: {
@@ -305,7 +308,7 @@ public class ParserGen {
 
 	void GenCodePragmas() {
 		foreach (Symbol sym in tab.pragmas) {
-			gen.WriteLine("\t\t\t\tif (la.kind == {0}) {{", sym.n);
+			gen.WriteLine("\t\t\t\tif (la.kind == {0}{1}) {{", sym.n, tab.symNames ? $" /* {SanitiseSymbolName(sym.name)} */ " : string.Empty);
 			CopySourcePart(sym.semPos, 4);
 			gen.WriteLine("\t\t\t\t}");
 		}
@@ -385,9 +388,9 @@ public class ParserGen {
 
 	public ParserGen (Parser parser) {
 		tab = parser.tab;
-		errors = parser.errors;
+		errors = parser.Errors;
 		trace = parser.trace;
-		buffer = parser.scanner.buffer;
+		buffer = parser.Scanner.Buffer;
 		errorNr = -1;
 		usingPos = null;
 	}

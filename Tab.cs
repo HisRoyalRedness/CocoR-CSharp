@@ -218,6 +218,8 @@ public class Tab {
 	                                  //   the end of Parser.Parse():
 	public bool emitLines;            // emit #line pragmas for semantic actions
 	                                  //   in the generated parser
+	public bool symNames;             // emit symbol names as code comments
+	                                  //   in the generated parser
 
 	BitArray visited;                 // mark list for graph traversals
 	Symbol curSy;                     // current symbol in computation of sets
@@ -229,7 +231,7 @@ public class Tab {
 	public Tab(Parser parser) {
 		this.parser = parser;
 		trace = parser.trace;
-		errors = parser.errors;
+		errors = parser.Errors;
 		eofSy = NewSym(Node.t, "EOF", 0);
 		dummyNode = NewNode(Node.eps, null, 0);
 		literals = new Hashtable();

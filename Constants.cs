@@ -16,5 +16,10 @@ namespace at.jku.ssw.Coco
         public const string SCANNER_STATIC_FILENAME = "Scanner.cs";
         public const string PARSER_STATIC_FILENAME = "Parser.cs";
 
+        // Parser constants
+        internal const int MINIMUM_ERROR_DISTANCE = 2;
+
+        // Scanner constants
+        internal const char EOL = '\n';
     }
 }

@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="Coco.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Deploy\Parser.cs" />
+    <Compile Include="Deploy\Scanner.cs" />
     <Compile Include="DFA.cs" />
     <Compile Include="Parser.generated.cs" />
     <Compile Include="ParserGen.cs" />
@@ -61,15 +63,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Deploy\Parser.frame" />
+    <None Include="Deploy\Scanner.frame" />
     <None Include="PreBuild.cmd" />
     <None Include="Coco.atg" />
     <None Include="LICENSE" />
     <None Include="PostBuild.cmd" />
-    <None Include="Parser.frame" />
     <None Include="README.md" />
-    <None Include="Scanner.frame" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>"$(ProjectDir)PostBuild.cmd" "$(ProjectDir)" "$(ConfigurationName)" "$(TargetPath)"</PostBuildEvent>

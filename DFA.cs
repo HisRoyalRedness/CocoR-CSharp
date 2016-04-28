@@ -891,7 +891,7 @@ public class DFA {
 			gen.WriteLine("\t\t\tNextCh();");
 			GenComBody(com);
 			gen.WriteLine("\t\t} else {");
-			gen.WriteLine("\t\t\tbuffer.Pos = pos0; NextCh(); line = line0; col = col0; charPos = charPos0;");
+			gen.WriteLine("\t\t\tBuffer.Pos = pos0; NextCh(); line = line0; col = col0; charPos = charPos0;");
 			gen.WriteLine("\t\t}");
 			gen.WriteLine("\t\treturn false;");
 		}
@@ -959,7 +959,7 @@ public class DFA {
 		if (endOf == null) {
 			gen.WriteLine("goto case 0;}");
 		} else {
-			gen.Write("t.kind = {0}; ", endOf.n);
+            gen.Write("t.kind = {0}; {1}", endOf.n, tab.symNames ? $"/* {ParserGen.SanitiseSymbolName(endOf.name)} */ " : string.Empty);
 			if (endOf.tokenKind == Symbol.classLitToken) {
 				gen.WriteLine("t.val = new String(tval, 0, tlen); CheckLiteral(); return t;}");
 			} else {
@@ -1050,7 +1050,7 @@ public class DFA {
 	public DFA (Parser parser) {
 		this.parser = parser;
 		tab = parser.tab;
-		errors = parser.errors;
+		errors = parser.Errors;
 		trace = parser.trace;
 		firstState = null; lastState = null; lastStateNr = -1;
 		firstState = NewState();
