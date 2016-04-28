@@ -158,9 +158,8 @@ public class ParserGen {
 				gen.Write("StartOf({0})", NewCondSet(s));
 		}
 	}
-	
-    public static string SanitiseSymbolName(string name) => name.Replace("*/", "*./");
-    
+
+	public static string SanitiseSymbolName(string name) { return name.Replace("*/", "*./"); }
 
 	void PutCaseLabels (BitArray s) {
 		foreach (Symbol sym in tab.terminals)
@@ -346,7 +345,7 @@ public class ParserGen {
 		symSet.Add(tab.allSyncSets);
 
 		fram = g.OpenFrame("Parser.frame");
-		gen = g.OpenGen(Constants.PARSER_GENERATED_FILENAME);
+		gen = g.OpenGen("Parser.generated.cs");
 		err = new StringWriter();
 		foreach (Symbol sym in tab.terminals) GenErrorMsg(tErr, sym);
 		
@@ -388,9 +387,9 @@ public class ParserGen {
 
 	public ParserGen (Parser parser) {
 		tab = parser.tab;
-		errors = parser.Errors;
+		errors = parser.errors;
 		trace = parser.trace;
-		buffer = parser.Scanner.Buffer;
+		buffer = parser.scanner.buffer;
 		errorNr = -1;
 		usingPos = null;
 	}

@@ -52,7 +52,7 @@ public class Coco {
 		string srcName = null, nsName = null, frameDir = null, ddtString = null,
 		traceFileName = null, outDir = null;
 		bool emitLines = false;
-        bool printSymbolNames = false;
+		bool symNames = false;
 		int retVal = 1;
 		for (int i = 0; i < arg.Length; i++) {
 			if (arg[i] == "-namespace" && i < arg.Length - 1) nsName = arg[++i].Trim();
@@ -60,7 +60,7 @@ public class Coco {
 			else if (arg[i] == "-trace" && i < arg.Length - 1) ddtString = arg[++i].Trim();
 			else if (arg[i] == "-o" && i < arg.Length - 1) outDir = arg[++i].Trim();
 			else if (arg[i] == "-lines") emitLines = true;
-            else if (arg[i] == "-symnames") printSymbolNames = true;
+			else if (arg[i] == "-symnames") symNames = true;
 			else srcName = arg[i];
 		}
 		if (arg.Length > 0 && srcName != null) {
@@ -82,7 +82,7 @@ public class Coco {
 				parser.tab.frameDir = frameDir;
 				parser.tab.outDir = (outDir != null) ? outDir : srcDir;
 				parser.tab.emitLines = emitLines;
-                parser.tab.symNames = printSymbolNames;
+				parser.tab.symNames = symNames;
 				if (ddtString != null) parser.tab.SetDDT(ddtString);
 
 				parser.Parse();
@@ -91,8 +91,8 @@ public class Coco {
 				FileInfo f = new FileInfo(traceFileName);
 				if (f.Length == 0) f.Delete();
 				else Console.WriteLine("trace output is in " + traceFileName);
-				Console.WriteLine("{0} errors detected", parser.Errors.ErrorCount);
-				if (parser.Errors.ErrorCount == 0) { retVal = 0; }
+				Console.WriteLine("{0} errors detected", parser.errors.count);
+				if (parser.errors.count == 0) { retVal = 0; }
 			} catch (IOException) {
 				Console.WriteLine("-- could not open " + traceFileName);
 			} catch (FatalError e) {
@@ -106,8 +106,8 @@ public class Coco {
 			                  + "  -trace     <traceString>{0}"
 			                  + "  -o         <outputDirectory>{0}"
 			                  + "  -lines{0}"
-                              + "  -symnames{0}"
-                              + "Valid characters in the trace string:{0}"
+			                  + "  -symnames{0}"
+			                  + "Valid characters in the trace string:{0}"
 			                  + "  A  trace automaton{0}"
 			                  + "  F  list first/follow sets{0}"
 			                  + "  G  print syntax graph{0}"

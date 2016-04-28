@@ -13,4 +13,5 @@ To use this app, copy everything from the Deploy folder into you project folder.
 You'll need to provide your own .ATG file, and once ```coco.exe``` is run, it will 
 generate a ```Scanner.generated.cs``` and ```Parser.generated.cs``` to complement
 the ```Scanner.cs``` and ```Parser.cs``` static files. You can build your project
-normally from there.
+normally from there. You'll probably need to change the namespace in ```Scanner.cs``` 
+and ```Parser.cs```.
