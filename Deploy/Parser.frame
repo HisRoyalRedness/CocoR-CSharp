@@ -104,11 +104,12 @@ public partial class Parser {
 	
 -->productions
 
-	public void Parse() {
+	public bool Parse() {
 		la = new Token();
 		la.val = "";		
 		Get();
 -->parseRoot
+		return errors.count == 0;
 	}
 	
 	static readonly bool[,] set = {

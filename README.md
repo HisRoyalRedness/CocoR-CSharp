@@ -23,4 +23,4 @@ and ```Parser.cs```.
 [Build Status]: https://ci.appveyor.com/project/KeithFletcher/cocor-csharp/branch/master
 [BS img]: https://ci.appveyor.com/api/projects/status/dff3q7sq8t1xnnvl/branch/master?svg=true
 [DL Link]: https://ci.appveyor.com/api/projects/KeithFletcher/cocor-csharp/artifacts/CocoDeploy.zip?branch=master
-[DL img]: https://img.shields.io/badge/Download-v1.0.1.8-brightgreen.svg
+[DL img]: https://img.shields.io/badge/Download-v1.0.1.9-brightgreen.svg
