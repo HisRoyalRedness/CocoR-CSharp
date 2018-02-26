@@ -153,7 +153,7 @@ Coco                            (. Symbol sym; Graph g, g1, g2; string gramName;
                                    tab.SetupAnys();
                                    tab.RenumberPragmas();
                                    if (tab.ddt[2]) tab.PrintNodes();
-                                   if (errors.count == 0) {
+                                   if (Errors.count == 0) {
                                      Console.WriteLine("checking");
                                      tab.CompSymbolSets();
                                      if (tab.ddt[7]) tab.XRef();

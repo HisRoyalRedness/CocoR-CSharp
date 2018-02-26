@@ -387,9 +387,9 @@ public class ParserGen {
 
 	public ParserGen (Parser parser) {
 		tab = parser.tab;
-		errors = parser.errors;
+		errors = parser.Errors;
 		trace = parser.trace;
-		buffer = parser.scanner.buffer;
+		buffer = parser.Scanner.buffer;
 		errorNr = -1;
 		usingPos = null;
 	}
