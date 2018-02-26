@@ -1,0 +1,71 @@
+
+#---------------------------------#
+#      general configuration      #
+#---------------------------------#
+
+version: 1.0.1.{build}
+branches:
+  only:
+    - master
+skip_tags: true
+
+
+#---------------------------------#
+#    environment configuration    #
+#---------------------------------#
+
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: "1.0.1.0"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
+
+environment:
+  access_token:
+    secure: 9oa4L71WB9kQ26UGlQh691KDzNjI5JqcjAoxM2uOUXbERNK94pY3xUDa0wsdJYqk
+
+#---------------------------------#
+#       build configuration       #
+#---------------------------------#
+
+platform: Any CPU
+configuration: Release
+before_build:
+  - nuget restore
+
+build:
+  project: Coco.sln
+
+
+#on_success:
+#  - git config --global credential.helper store
+#  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+#  - git config --global user.email "hisroyalredness@gmail.com"
+#  - git config --global user.name "Keith Flether (AppVeyor)"
+#  - git commit ...
+#  - git push ...
+
+
+#---------------------------------#
+#      artifacts configuration    #
+#---------------------------------#
+
+artifacts:
+  - path: Deploy
+    name: CocoDeploy
+
+#---------------------------------#
+#     deployment configuration    #
+#---------------------------------#
+
+#deploy:
+#  description: 'CygwinDownloader Release: develop branch'
+#  provider: GitHub
+#  auth_token:
+#    secure: TrEuWWiCLlhkcejZorX7lC0wE0gTnYUuMVTsk6yy9QnZNo/4vYUfO3yhHeCa4MPA
+#  artifact: CygwinDownloader
+#  prerelease: true
+#  on:
+#    branch: coco
+

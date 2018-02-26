@@ -12,9 +12,7 @@ echo Target:      %Target%
 
 pushd "%ProjDir%"
 
-rem Copy the new Coco.exe, so we use this one next time
-copy /y "%Target%" "%ProjDir%"
-
 rem Build our deploy package
+echo copy Coco.exe into the Deploy folder
 if not exist deploy md Deploy
 copy /y "%Target%" "%ProjDir%Deploy"

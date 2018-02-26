@@ -10,7 +10,5 @@ echo Config:      %Config%
 
 pushd "%ProjDir%"
 
-rem Get the latest executable and frame files
-copy /y "%ProjDir%Deploy\Coco.exe" "%ProjDir%""
-
+echo Run Coco/R
 "%ProjDir%Deploy\Coco.exe" Coco.ATG -namespace at.jku.ssw.Coco -frames "%ProjDir%Deploy" -trace FJSX -symnames
