@@ -443,7 +443,7 @@ public class DFA {
 		Target t = new Target(to);
 		Action a = new Action(typ, sym, tc); a.target = t;
 		from.AddAction(a);
-		if (typ == Node.clas) curSy.tokenKind = Symbol.classToken;
+		if (typ == Node.clas) curSy.tokenKind = Symbol.TokenKind.ClassToken;
 	}
 	
 	void CombineShifts() {
@@ -630,12 +630,12 @@ public class DFA {
 		Symbol matchedSym = state.endOf;
 		if (state.endOf == null) {
 			state.endOf = sym;
-		} else if (matchedSym.tokenKind == Symbol.fixedToken || (a != null && a.tc == Node.contextTrans)) {
+		} else if (matchedSym.tokenKind == Symbol.TokenKind.FixedToken || (a != null && a.tc == Node.contextTrans)) {
 			// s matched a token with a fixed definition or a token with an appendix that will be cut off
 			parser.SemErr("tokens " + sym.name + " and " + matchedSym.name + " cannot be distinguished");
 		} else { // matchedSym == classToken || classLitToken
-			matchedSym.tokenKind = Symbol.classLitToken;
-			sym.tokenKind = Symbol.litToken;
+                matchedSym.tokenKind = Symbol.TokenKind.ClassLiteralToken;
+			sym.tokenKind = Symbol.TokenKind.LiteralToken;
 		}
 	}
 	
@@ -912,14 +912,22 @@ public class DFA {
 		} else {
 			gen.WriteLine("\t\tswitch (t.val) {");
 		}
-		foreach (IList ts in new IList[] { tab.terminals, tab.pragmas }) {
-			foreach (Symbol sym in ts) {
-				if (sym.tokenKind == Symbol.litToken) {
-					string name = SymName(sym);
-					if (ignoreCase) name = name.ToLower();
-					// sym.name stores literals with quotes, e.g. "\"Literal\""
-					gen.WriteLine("\t\t\tcase {0}: t.kind = {1}; break;", name, sym.n);
-				}
+        gen.WriteLine("\t\t\t//Terminals");
+		foreach (Symbol sym in tab.terminals) {
+			if (sym.tokenKind == Symbol.TokenKind.LiteralToken) {
+				string name = SymName(sym);
+				if (ignoreCase) name = name.ToLower();
+				// sym.name stores literals with quotes, e.g. "\"Literal\""
+				gen.WriteLine("\t\t\tcase {0}: t.kind = {1}; break;", name, sym.n);
+			}
+		}
+        gen.WriteLine("\t\t\t//Pragmas");
+		foreach (Symbol sym in tab.pragmas) {
+			if (sym.tokenKind == Symbol.TokenKind.LiteralToken) {
+				string name = SymName(sym);
+				if (ignoreCase) name = name.ToLower();
+				// sym.name stores literals with quotes, e.g. "\"Literal\""
+				gen.WriteLine("\t\t\tcase {0}: t.kind = {1}; break;", name, sym.n);
 			}
 		}
 		gen.WriteLine("\t\t\tdefault: break;");
@@ -960,7 +968,7 @@ public class DFA {
 			gen.WriteLine("goto case 0;}");
 		} else {
             gen.Write("t.kind = {0}; {1}", endOf.n, tab.symNames ? $"/* {ParserGen.SanitiseSymbolName(endOf.name)} */ " : string.Empty);
-			if (endOf.tokenKind == Symbol.classLitToken) {
+			if (endOf.tokenKind == Symbol.TokenKind.ClassLiteralToken) {
 				gen.WriteLine("t.val = new String(tval, 0, tlen); CheckLiteral(); return t;}");
 			} else {
 				gen.WriteLine("break;}");
@@ -998,7 +1006,7 @@ public class DFA {
 			gen.Write(tab.nsName);
 			gen.Write(" {");
 		}
-		g.CopyFramePart("-->declarations");
+        g.CopyFramePart("-->declarations");
 		gen.WriteLine("\tconst int maxT = {0};", tab.terminals.Count - 1);
 		gen.WriteLine("\tconst int noSym = {0};", tab.noSym.n);
 		if (ignoreCase)

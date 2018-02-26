@@ -76,7 +76,7 @@
     <PostBuildEvent>"$(ProjectDir)PostBuild.cmd" "$(ProjectDir)" "$(ConfigurationName)" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>"$(ProjectDir)PreBuild.cmd" "$(ProjectDir)" "$(ConfigurationName)"</PreBuildEvent>
+    <PreBuildEvent>rem "$(ProjectDir)PreBuild.cmd" "$(ProjectDir)" "$(ConfigurationName)"</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

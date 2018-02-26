@@ -237,7 +237,7 @@ TokenDecl<int typ>              (. string name; int kind; Symbol sym; Graph g; .
                                    if (sym != null) SemErr("name declared twice");
                                    else {
                                      sym = tab.NewSym(typ, name, t.line);
-                                     sym.tokenKind = Symbol.fixedToken;
+                                     sym.tokenKind = Symbol.TokenKind.FixedToken;
                                    }
                                    tokenString = null;
                                  .)
