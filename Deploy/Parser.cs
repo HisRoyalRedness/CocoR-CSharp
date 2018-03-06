@@ -115,7 +115,7 @@ namespace at.jku.ssw.Coco
             => WriteLine(s);
 
         void WriteLine(string format, params object[] args)
-            => Debug.WriteLine(format, args);
+            => Console.WriteLine(format, args);
 
         // The number of errors generated
         public int ErrorCount { get; private set; } = 0;

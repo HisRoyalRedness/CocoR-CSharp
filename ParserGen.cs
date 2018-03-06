@@ -163,7 +163,7 @@ public class ParserGen {
 
 	void PutCaseLabels (BitArray s) {
 		foreach (Symbol sym in tab.terminals)
-			if (s[sym.n]) gen.Write("case {0}: ", sym.n);
+			if (s[sym.n]) gen.Write("case {0}: /* {1}*/", sym.n, sym.name);
 	}
 	
 	void GenCode (Node p, int indent, BitArray isChecked) {
